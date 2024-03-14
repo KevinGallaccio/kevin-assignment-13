@@ -48,4 +48,14 @@ public class Account {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Account{" +
+				"accountId=" + accountId +
+				", accountName='" + accountName + '\'' +
+				", transactions=" + transactions +
+				", users=" + users +
+				'}';
+	}
 }
