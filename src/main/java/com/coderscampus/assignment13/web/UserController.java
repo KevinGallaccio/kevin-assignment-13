@@ -1,5 +1,6 @@
 package com.coderscampus.assignment13.web;
 
+import com.coderscampus.assignment13.domain.Account;
 import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.service.UserService;
@@ -29,7 +30,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String postCreateUser(User user) {
-        System.out.println(user);
         userService.saveUser(user);
         return "redirect:/register";
     }
@@ -73,4 +73,6 @@ public class UserController {
         userService.delete(userId);
         return "redirect:/users";
     }
+
+
 }
