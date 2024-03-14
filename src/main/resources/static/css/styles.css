@@ -1,0 +1,68 @@
+/* styles.css */
+/* Disable caching */
+/*# sourceMappingURL=styles.css.map */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #0e0e0e;
+}
+
+.a13-user-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.a13-user {
+    display: flex;
+    flex-direction: column;
+}
+
+.a13-accounts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.a13-link {
+    color: darkslategray;
+}
+
+.a13-hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #e3e0e0;
+}
+
+.a13-hr-small {
+    border-color: rgba(47, 79, 79, 0.54);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+}
+
+.a13-address {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+}
+
+.a13-edit {
+    text-decoration: none;
+    color: darkslategray;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.a13-edit:hover {
+    color: black;
+    /*text-decoration: none;*/
+}

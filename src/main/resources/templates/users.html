@@ -1,40 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
-		<title>Users</title>
-	</head>
-	<body>
-		<h1>Users</h1>
-		
-		<div th:if="${#lists.size(users) == 1}">
-			<form action="" method="post">
-				<div>
-					Username: <input type="text" th:field="${user.username}" />
-				</div>
-				<div>
-					Password: <input type="password" th:field="${user.password}" />
-				</div>
-				<div>
-					Full Name: <input type="text" th:field="${user.name}" />
-				</div>
-				<div>
-					<input type="submit" value="Update User Account" />
-				</div>
-			</form>
-			<form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">
-				<input type="submit" value="Delete User Account" />
-			</form>
-		</div>
-		
-		<div th:unless="${#lists.size(users) == 1}" th:each="user : ${users}">
-		    <span th:text="${user.userId}"></span><br/>
-			<span th:text="${user.username}"></span><br/>
-			<span th:text="${user.name}"></span><br/>
-			<span th:text="${user.password}"></span>
-			<div th:each="account : ${user.accounts}">
-				<span th:text="${account.accountName}"></span>
-			</div>
-			<hr/>
-		</div>
-	</body>
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"/>
+</head>
+<body>
+<h1>Users</h1>
+
+<div th:if="${#lists.size(users) == 1}">
+    <form action="" method="post">
+        <div>
+            Username: <input type="text" th:field="${user.username}"/>
+        </div>
+        <div>
+            Full Name: <input type="text" th:field="${user.name}"/>
+        </div>
+        <div>
+            Password:
+            <input type="password" placeholder="* * * * * * *" th:field="${user.password}"/>
+        </div>
+        <hr>
+
+        <div>
+            <div>
+                Address Line 1: <input type="text" th:field="${address.addressLine1}">
+            </div>
+            <div>
+                Address Line 2: <input type="text" th:field="${address.addressLine2}">
+            </div>
+            <div>
+                City: <input type="text" th:field="${address.city}">
+            </div>
+            <div>
+                Region: <input type="text" th:field="${address.region}">
+            </div>
+            <div>
+                Country: <input type="text" th:field="${address.country}">
+            </div>
+            <div>
+                Zip Code: <input type="text" th:field="${address.zipCode}">
+            </div>
+        </div>
+
+
+        <div>
+            <input type="submit" value="Update User Profile"/>
+        </div>
+    </form>
+    <form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">
+        <input type="submit" value="Delete User Account"/>
+    </form>
+    <hr>
+    <h2>Accounts</h2>
+    <div th:each="account : ${user.accounts}">
+        <a class="a13-link"
+           th:href="@{/users/{userId}/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
+    </div>
+</div>
+
+<div th:unless="${#lists.size(users) == 1}" th:each="user : ${users}">
+    <div class="a13-user-card">
+        <div class="a13-user">
+            <span><strong>User Id: </strong> [[${user.userId}]]</span>
+            <span><strong>Username: </strong> [[${user.username}]]</span>
+            <span><strong>Full Name: </strong> [[${user.name}]]</span>
+            <span><strong>Password: </strong> [[${user.password}]]</span>
+            <div th:each="address : ${user.address}">
+                <hr class="a13-hr-small"/>
+                <span><strong>Address: </strong>
+                <div class="a13-address">
+                <span>[[${address.addressLine1}]]</span>
+                <span>[[${address.addressLine2}]]</span>
+                <span>[[${address.city}]]</span>
+                <span>[[${address.region}]]</span>
+                <span>[[${address.country}]]</span>
+                <span>[[${address.zipCode}]]</span>
+                </div>
+            </span>
+            </div>
+            <hr class="a13-hr-small"/>
+            <span><strong>Accounts:</strong></span>
+            <div th:unless="${#lists.size(user.accounts) == 0}">
+                <div class="a13-accounts">
+                    <div th:each="account : ${user.accounts}">
+                        <a class="a13-link"
+                           th:href="@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#lists.size(user.accounts) == 0}">
+                <form th:action="@{/users/{userId}/accounts/new}(userId=${user.userId})}" method="post">
+                    <input type="submit" value="Create new Account"/>
+                </form>
+            </div>
+        </div>
+        <a th:href="@{/users/{userId}(userId=${user.userId})}" title="edit user" class="a13-edit">
+            <i class="fa-regular fa-pen-to-square"></i>
+        </a>
+    </div>
+    <hr class="a13-hr"/>
+</div>
+</body>
 </html>
