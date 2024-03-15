@@ -27,7 +27,6 @@ public class AccountController {
         account.getUsers().add(user);
         user.getAccounts().add(account);
         account.setAccountName(user.getName() + "'s Account " + user.getAccounts().size());
-//        accountService.saveAccount(account);
         model.put("user", user);
         model.put("account", account);
         return "create";

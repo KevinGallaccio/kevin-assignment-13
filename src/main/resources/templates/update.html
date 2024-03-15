@@ -2,21 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update</title>
+    <title>[[${account.accountName}]]</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"/>
 </head>
 <body>
-<h1>Edit [[${account.accountName}]]</h1>
-<form action="" method="post">
-    <div>
-        Account Name: <input type="text" th:field="${account.accountName}" />
-    </div>
-    <div>
-        <input type="submit" value="Update Account"/>
-    </div>
-</form>
-<form th:action="@{/users/{userId}/accounts/{accountId}/delete(userId=${user.userId}, accountId=${account.accountId})}" method="post">
-    <input type="submit" value="Delete User Account"/>
-</form>
 
+
+<div class="a13-main-content">
+    <div class="a13-header">
+        <h1 class="a13-page-title">[[${account.accountName}]]</h1>
+    </div>
+
+    <div class="a13-user-register">
+        <div class="a13-user-register-form" style="height: 240px; justify-content: center; gap: 0px;">
+            <form class="a13-user-register-form" action="" method="post">
+                <div class="a13-form-line">
+                    <label class="a13-label">Change Your Account Name:</label>
+                    <input class="a13-input" type="text" th:field="${account.accountName}"/>
+                </div>
+                <div>
+                    <input class="a13-button" type="submit" value="Update Account"/>
+                </div>
+                <a class="a13-close" th:href="@{/users/{userId}(userId=${user.userId})}"><i
+                        class="fa-solid fa-circle-xmark"></i></a>
+            </form>
+            <form th:action="@{/users/{userId}/accounts/{accountId}/delete(userId=${user.userId}, accountId=${account.accountId})}"
+                  method="post">
+                <input class="a13-button-2" type="submit" value="Delete User Account"/>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

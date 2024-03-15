@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
-		<title>Create Account</title>
-	</head>
-	<body>
-		<h1>Create Your Account</h1>
-		
-		<form action="" method="post">
-			<div>
-				Username: <input type="text" th:field="${user.username}" />
-			</div>
-			<div>
-				Password: <input type="password" th:field="${user.password}" />
-			</div>
-			<div>
-				Full Name: <input type="text" th:field="${user.name}" />
-			</div>
-			<div>
-				<input type="submit" value="Create Account" />
-			</div>
-		</form>
-	</body>
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"/>
+</head>
+<body>
+<div class="a13-main-content">
+    <div class="a13-header">
+        <h1 class="a13-page-title">New Account</h1>
+    </div>
+
+    <div class="a13-user-register">
+        <form class="a13-user-register-form" action="" method="post">
+            <div class="a13-form-line">
+                <label class="a13-label">Username: </label>
+                <input class="a13-input" type="text" th:field="${user.username}"/>
+            </div>
+            <div class="a13-form-line">
+                <label class="a13-label">Password:</label>
+                <input class="a13-input" type="password" th:field="${user.password}"/>
+            </div>
+            <div class="a13-form-line">
+                <label class="a13-label">Full Name:</label>
+                <input class="a13-input" type="text" th:field="${user.name}"/>
+            </div>
+            <div>
+                <input class="a13-button" type="submit" value="Create Account"/>
+            </div>
+            <a class="a13-close" th:href="@{/users}"><i class="fa-solid fa-circle-xmark"></i></a>
+        </form>
+    </div>
+</div>
+</body>
 </html>
