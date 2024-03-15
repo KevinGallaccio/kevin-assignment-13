@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class AccountController {
@@ -27,10 +27,10 @@ public class AccountController {
         account.getUsers().add(user);
         user.getAccounts().add(account);
         account.setAccountName(user.getName() + "'s Account " + user.getAccounts().size());
-        accountService.saveAccount(account);
+//        accountService.saveAccount(account);
         model.put("user", user);
         model.put("account", account);
-        return "account";
+        return "create";
     }
 
     @PostMapping("/users/{userId}/accounts/new")
@@ -44,11 +44,31 @@ public class AccountController {
         return "redirect:/users/" + userId;
     }
 
+
     @GetMapping("/users/{userId}/accounts/{accountId}")
     public String getUpdateAccount(ModelMap model, @PathVariable Long userId, @PathVariable Long accountId) {
+        model.put("user", userService.findById(userId));
         Account account = accountService.findById(accountId);
         model.put("account", account);
-        return "account";
+        return "update";
+    }
+
+    @PostMapping("/users/{userId}/accounts/{accountId}")
+    public String postUpdateAccount(@ModelAttribute("account") Account updatedAccount, @PathVariable Long userId, @PathVariable Long accountId) {
+        Account account = accountService.findById(accountId);
+        account.setAccountName(updatedAccount.getAccountName());
+        accountService.saveAccount(account);
+        return "redirect:/users/" + userId;
+    }
+
+    @PostMapping("users/{userId}/accounts/{accountId}/delete")
+    public String deleteOneUser(@PathVariable Long accountId, @PathVariable Long userId) {
+        Account account = accountService.findById(accountId);
+        User user = userService.findById(userId);
+        user.getAccounts().remove(account);
+        userService.saveUser(user);
+        accountService.delete(accountId);
+        return "redirect:/users/" + userId;
     }
 
 }

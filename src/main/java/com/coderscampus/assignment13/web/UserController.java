@@ -30,8 +30,11 @@ public class UserController {
 
     @PostMapping("/register")
     public String postCreateUser(User user) {
+        Address newAddress = new Address();
+        newAddress.setUser(user);
+        userService.saveAddress(newAddress);
         userService.saveUser(user);
-        return "redirect:/register";
+        return "redirect:/users";
     }
 
     @GetMapping("/users")
@@ -49,11 +52,6 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public String getOneUser(ModelMap model, @PathVariable Long userId) {
         User user = userService.findById(userId);
-        if (user.getAddress() == null) {
-            Address newAddress = new Address();
-            newAddress.setUser(user);
-            userService.saveAddress(newAddress);
-        }
         model.put("users", Arrays.asList(user));
         model.put("user", user);
         Address address = user.getAddress();
@@ -63,9 +61,17 @@ public class UserController {
 
     @PostMapping("/users/{userId}")
     public String postOneUser(User user, Address address) {
-        userService.saveAddress(address);
-        userService.saveUser(user);
-        return "redirect:/users/" + user.getUserId();
+        User originalUser = userService.findById(user.getUserId());
+        originalUser.setUsername(user.getUsername());
+        originalUser.setName(user.getName());
+        if (!user.getPassword().isEmpty()) {
+            originalUser.setPassword(user.getPassword());
+        }
+        Address originalAddress = originalUser.getAddress();
+        originalAddress.setAll(address);
+        userService.saveAddress(originalAddress);
+        userService.saveUser(originalUser);
+        return "redirect:/users/" + originalUser.getUserId();
     }
 
     @PostMapping("/users/{userId}/delete")

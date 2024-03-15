@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"/>
 </head>
 <body>
-<h1>Users</h1>
+<h1 class="a13-header">Users</h1>
 
 <div th:if="${#lists.size(users) == 1}">
     <form action="" method="post">
@@ -55,20 +55,29 @@
     <h2>Accounts</h2>
     <div th:each="account : ${user.accounts}">
         <a class="a13-link"
-           th:href="@{/users/{userId}/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
+           th:href="@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
     </div>
+    <a th:href="@{/users/{userId}/accounts/new(userId=${user.userId})}" class="button"><i
+            class="fa-solid fa-circle-plus"></i> Create New Account</a>
+    <a th:href="@{/users}">Back</a>
 </div>
 
-<div th:unless="${#lists.size(users) == 1}" th:each="user : ${users}">
-    <div class="a13-user-card">
-        <div class="a13-user">
-            <span><strong>User Id: </strong> [[${user.userId}]]</span>
-            <span><strong>Username: </strong> [[${user.username}]]</span>
-            <span><strong>Full Name: </strong> [[${user.name}]]</span>
-            <span><strong>Password: </strong> [[${user.password}]]</span>
-            <div th:each="address : ${user.address}">
-                <hr class="a13-hr-small"/>
-                <span><strong>Address: </strong>
+<div th:unless="${#lists.size(users) == 1}">
+    <div th:each="user : ${users}">
+        <div class="a13-user-card">
+            <div class="a13-user">
+                <div class="a13-title">
+                    <h2><strong>[[${user.name}]]</strong></h2>
+                    <a th:href="@{/users/{userId}(userId=${user.userId})}" title="edit user" class="a13-edit">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                </div>
+                <span><strong>User Id: </strong> [[${user.userId}]]</span>
+                <span><strong>Username: </strong> [[${user.username}]]</span>
+                <span><strong>Password: </strong> [[${user.password}]]</span>
+                <div th:each="address : ${user.address}">
+                    <hr class="a13-hr-small"/>
+                    <span><strong>Address: </strong>
                 <div class="a13-address">
                 <span>[[${address.addressLine1}]]</span>
                 <span>[[${address.addressLine2}]]</span>
@@ -78,28 +87,30 @@
                 <span>[[${address.zipCode}]]</span>
                 </div>
             </span>
-            </div>
-            <hr class="a13-hr-small"/>
-            <span><strong>Accounts:</strong></span>
-            <div th:unless="${#lists.size(user.accounts) == 0}">
-                <div class="a13-accounts">
-                    <div th:each="account : ${user.accounts}">
-                        <a class="a13-link"
-                           th:href="@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
+                </div>
+                <hr class="a13-hr-small"/>
+                <span><strong>Accounts:</strong></span>
+                <div th:unless="${#lists.size(user.accounts) == 0}">
+                    <div class="a13-accounts">
+                        <div th:each="account : ${user.accounts}">
+                            <a class="a13-link"
+                               th:href="@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}">[[${account.accountName}]]</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div th:if="${#lists.size(user.accounts) == 0}">
-                <form th:action="@{/users/{userId}/accounts/new}(userId=${user.userId})}" method="post">
-                    <input type="submit" value="Create new Account"/>
-                </form>
+                <!--            <div th:if="${#lists.size(user.accounts) == 0}">-->
+                <!--                <form th:action="@{/users/{userId}/accounts/new}(userId=${user.userId})}" method="post">-->
+                <!--                    <input type="submit" value="Create new Account"/>-->
+                <!--                </form>-->
+                <!--            </div>-->
             </div>
         </div>
-        <a th:href="@{/users/{userId}(userId=${user.userId})}" title="edit user" class="a13-edit">
-            <i class="fa-regular fa-pen-to-square"></i>
-        </a>
+        <hr class="a13-hr"/>
     </div>
-    <hr class="a13-hr"/>
+    <a th:href="@{/register}" title="new user">
+        Create new User
+    </a>
 </div>
+
 </body>
 </html>

@@ -61,7 +61,7 @@ public class User {
 	}
 
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Address getAddress() {
 		return address;
 	}

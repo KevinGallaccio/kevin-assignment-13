@@ -77,4 +77,14 @@ public class Address {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+
+	public void setAll(Address newAddress) {
+		this.addressLine1 = newAddress.addressLine1;
+		this.addressLine2 = newAddress.addressLine2;
+		this.city = newAddress.city;
+		this.region = newAddress.region;
+		this.country = newAddress.country;
+		this.zipCode = newAddress.zipCode;
+	}
+
 }

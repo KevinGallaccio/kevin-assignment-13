@@ -76,12 +76,20 @@ public class UserService {
 	}
 
 	public void delete(Long userId) {
-		userRepo.deleteById(userId);
+		Optional<User> userOptional = userRepo.findById(userId);
+		if (userOptional.isPresent()) {
+		User user = userOptional.get();
+        accountRepo.deleteAll(user.getAccounts());
+		userRepo.delete(user);
+		} else {
+			System.out.println("User not found");
+		}
 	}
 
 	public Set<User> findAllUsersWithAccountsAndAddresses(){
 		return userRepo.findAllUsersWithAccountsAndAddresses();
 	}
+
 }
 
 

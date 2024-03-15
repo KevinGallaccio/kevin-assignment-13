@@ -7,6 +7,22 @@
 body {
     font-family: 'Roboto', sans-serif;
     color: #0e0e0e;
+    margin: 24px;
+}
+
+h1 {
+    color: #3f8787;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.a13-header {
+    color: #3f8787;
+    background-color: #f1f1f1;
+    padding: 16px;
+    border-radius: 8px;
 }
 
 .a13-user-card {
@@ -19,7 +35,34 @@ body {
 .a13-user {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 24px;
+    border-radius: 8px;
+    gap: 4px;
 }
+
+.a13-title {
+    display: flex;
+    justify-content: space-between;
+    color: darkslategray;
+}
+
+.a13-edit {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.a13-edit:hover {
+    color: black;
+    /*text-decoration: none;*/
+}
+
+.a13-edit:visited {
+    color: darkslategray;
+}
+
 
 .a13-accounts {
     display: flex;
@@ -53,16 +96,4 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 80px;
-}
-
-.a13-edit {
-    text-decoration: none;
-    color: darkslategray;
-    font-size: 20px;
-    font-weight: 100;
-}
-
-.a13-edit:hover {
-    color: black;
-    /*text-decoration: none;*/
 }

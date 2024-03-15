@@ -22,4 +22,8 @@ public class AccountService {
         return accountOpt.orElse(new Account());
     }
 
+    public void delete(Long id) {
+        accountRepo.deleteById(id);
+    }
+
 }
