@@ -44,6 +44,7 @@ public class UserController {
         model.put("users", users);
         if (users.size() == 1) {
             model.put("user", users.iterator().next());
+            model.put("address", users.iterator().next().getAddress());
         }
 
         return "users";

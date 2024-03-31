@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Users</title>
     <link rel="stylesheet" href="/css/styles.css"/>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="a13-user-info" th:if="${#lists.size(users) == 1}">
-        <form class="a13-form" action="" method="post">
+        <form class="a13-form" th:action="@{'/users/' + ${user.userId}}" method="post">
             <h2>Edit Profile Info</h2>
             <div class="a13-form-line">
                 <label class="a13-label">Username: </label>
